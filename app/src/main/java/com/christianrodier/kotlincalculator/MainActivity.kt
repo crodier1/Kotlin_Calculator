@@ -34,11 +34,34 @@ class MainActivity : AppCompatActivity() {
             btn7.id -> currentOp += "7"
             btn8.id -> currentOp += "8"
             btn9.id -> currentOp += "9"
-            btnDot.id -> currentOp += "." // TODO prevent adding more than one dot
-            btnPlusMinus.id ->  currentOp = "-" + currentOp
+            btnDot.id ->  currentOp = dotLogic(currentOp)
+            btnPlusMinus.id -> currentOp = plusMinusLogic(currentOp)
         }
 
         etShowOp.setText(currentOp)
+
+    }
+
+    private fun dotLogic(currentOp: String):String {
+
+        if (currentOp.indexOf('.') == -1 ){
+
+            return currentOp + "."
+        }
+        return currentOp
+
+    }
+
+    private fun plusMinusLogic(currentOp: String):String {
+
+        try {
+            return (currentOp.toDouble() * -1).toString()
+        }
+        catch (e: Exception)
+        {
+             return (finalNum!! * -1).toString()
+
+        }
 
     }
 
@@ -62,10 +85,12 @@ class MainActivity : AppCompatActivity() {
 
     }
 
+        var finalNum: Double? = null
+
     fun btnEqualsEvent(view:View){
 
         val newNumber = etShowOp.text.toString()
-        var finalNum:Double? = null
+       // var finalNum:Double? = null
 
         when(op){
             "*"->  finalNum = oldNumber.toDouble() * newNumber.toDouble()
