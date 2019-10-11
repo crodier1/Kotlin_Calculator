@@ -24,16 +24,16 @@ class MainActivity : AppCompatActivity() {
         var currentOp:String = etShowOp.text.toString()
 
         when(btnSelected.id){
-            btn0.id -> currentOp += "0"
-            btn1.id -> currentOp += "1"
-            btn2.id -> currentOp += "2"
-            btn3.id -> currentOp += "3"
-            btn4.id -> currentOp += "4"
-            btn5.id -> currentOp += "5"
-            btn6.id -> currentOp += "6"
-            btn7.id -> currentOp += "7"
-            btn8.id -> currentOp += "8"
-            btn9.id -> currentOp += "9"
+            btn0.id -> currentOp += Numbers.zero
+            btn1.id -> currentOp += Numbers.one
+            btn2.id -> currentOp += Numbers.two
+            btn3.id -> currentOp += Numbers.three
+            btn4.id -> currentOp += Numbers.four
+            btn5.id -> currentOp += Numbers.five
+            btn6.id -> currentOp += Numbers.six
+            btn7.id -> currentOp += Numbers.seven
+            btn8.id -> currentOp += Numbers.eight
+            btn9.id -> currentOp += Numbers.nine
             btnDot.id ->  currentOp = dotLogic(currentOp)
             btnPlusMinus.id -> currentOp = plusMinusLogic(currentOp)
         }
@@ -44,9 +44,9 @@ class MainActivity : AppCompatActivity() {
 
     private fun dotLogic(currentOp: String):String {
 
-        if (currentOp.indexOf('.') == -1 ){
+        if (currentOp.indexOf(Numbers.dot) == -1 ){
 
-            return currentOp + "."
+            return currentOp + Numbers.dot
         }
         return currentOp
 
@@ -74,10 +74,10 @@ class MainActivity : AppCompatActivity() {
         var btnSelected = view as Button
 
         when(btnSelected.id){
-            btnMul.id -> op="*"
-            btnDiv.id -> op="/"
-            btnSub.id -> op = "-"
-            btnPlus.id -> op = "+"
+            btnMul.id -> op = Operators.multiply
+            btnDiv.id -> op = Operators.divide
+            btnSub.id -> op = Operators.subtract
+            btnPlus.id -> op = Operators.add
         }
 
         oldNumber = etShowOp.text.toString()
@@ -90,13 +90,13 @@ class MainActivity : AppCompatActivity() {
     fun btnEqualsEvent(view:View){
 
         val newNumber = etShowOp.text.toString()
-       // var finalNum:Double? = null
+       
 
         when(op){
-            "*"->  finalNum = oldNumber.toDouble() * newNumber.toDouble()
-            "/"-> finalNum = oldNumber.toDouble() / newNumber.toDouble()
-            "+"-> finalNum = oldNumber.toDouble() + newNumber.toDouble()
-            "-"-> finalNum = oldNumber.toDouble() - newNumber.toDouble()
+            Operators.multiply ->  finalNum = oldNumber.toDouble() * newNumber.toDouble()
+            Operators.divide -> finalNum = oldNumber.toDouble() / newNumber.toDouble()
+            Operators.add -> finalNum = oldNumber.toDouble() + newNumber.toDouble()
+            Operators.subtract -> finalNum = oldNumber.toDouble() - newNumber.toDouble()
         }
 
         etShowOp.setText(finalNum.toString())
